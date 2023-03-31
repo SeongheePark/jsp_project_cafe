@@ -14,6 +14,7 @@
 	box-sizing: border-box;
 	font-family: 'Noto Sans KR', sans-serif;
 }
+
 .page-container {
 	margin: 0;
 	padding: 0;
@@ -64,7 +65,7 @@ a :hover{
 			</div>
 			<div class="header-icon">
 				<span class="material-symbols-outlined">local_cafe</span>
-				<span><a href="/project/orderTest?action=select">ORDER</a></span>
+				<span><a href="/project/orderSelectCheck.jsp">ORDER</a></span>
 			</div>
 		</div>
 	</div>

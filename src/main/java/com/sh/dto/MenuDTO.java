@@ -4,6 +4,10 @@ public class MenuDTO {
 	private int id;
 	private String menu;
 	private int price;
+	
+	public MenuDTO(String menu) {
+		this.menu = menu;
+	}
 
 	public MenuDTO(String menu, int price) {
 		super();

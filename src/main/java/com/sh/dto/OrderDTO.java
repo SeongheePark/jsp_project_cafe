@@ -6,9 +6,14 @@ public class OrderDTO {
 	private String menu;
 	private int count;
 	private String date;
-	
-	
-	
+
+	public OrderDTO() {
+	}
+
+	public OrderDTO(String name) {
+		this.name = name;
+	}
+
 	public OrderDTO(int id, String name, String menu, int count, String date) {
 		super();
 		this.id = id;

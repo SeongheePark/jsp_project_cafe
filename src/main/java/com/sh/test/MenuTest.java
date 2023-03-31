@@ -1,6 +1,7 @@
 package com.sh.test;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -37,7 +38,23 @@ public class MenuTest extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
 
+		MenuDAO menuDAO = new MenuDAO();
+		ArrayList<MenuDTO> orderListType = menuDAO.selectMenu();
+		ArrayList<MenuDTO> getMenu = new ArrayList<MenuDTO>();
+
+		for (int i = 0; i < orderListType.size(); i++) {
+			String tempOn = request.getParameter(orderListType.get(i).getMenu());
+			if (tempOn != null) {
+				MenuDTO dto = new MenuDTO(orderListType.get(i).getMenu(), orderListType.get(i).getPrice());
+				getMenu.add(dto);
+			}
+		}
+		request.setAttribute("list", getMenu);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("shoppingBag.jsp");
+		dispatcher.forward(request, response);
 	}
 
 }

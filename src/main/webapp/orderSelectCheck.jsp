@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,52 +12,42 @@
 <jsp:include page="/layout/header.jsp"></jsp:include>
 <style type="text/css">
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400&display=swap');
-* {
+*{
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	font-family: 'Noto Sans KR', sans-serif;
 }
-#wrapper {
+.order-container {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	align-items: center;
 	height: 800px;
-	min-height: 100%;
-	padding-bottom: 100px;
 }
-table {
-	background-color: #E4BB60;
-	margin: 40px;
+.order-table {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 800px;
 }
-table tr, td{
-	padding: 10px;
-	margin-right: 5px;
+h1 {
+	margin: 20px;
 }
 input {
-	border: none;
-	cursor: pointer;
-	background-color: white;
+	margin: 20px;
 }
+
 </style>
 </head>
 <body>
-<div id='wrapper'>
-	<h1> MENU</h1>
-	<form action="/project/menuTest" method="post">
-	<table>
-		<c:forEach var="menuList" items="${list}">
-		<tr>
-			<td>${menuList.menu}</td>
-			<td>${menuList.price}</td>
-			<td><input type="checkbox" name="${menuList.menu}"></td>
-		</tr>
-		</c:forEach>
-	</table>
-	<input type="submit" value="장바구니 담기" >
+	<form action="/project/afterOrderTest" method="get">
+	<div class="order-container">
+	<h1>주문 내역 확인</h1> 
+	<p> 내가 주문한 내역 확인해보기 </p>
+	<p> 이름을 입력하세요 </p> 
+	<input type="text" name="name"> 
+	<input type="submit" value="확인">
+	</div>
 	</form>
-</div>
 </body>
 </html>
 <jsp:include page="/layout/footer.jsp"></jsp:include>

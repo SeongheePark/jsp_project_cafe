@@ -13,7 +13,6 @@
 	padding: 0;
 	box-sizing: border-box;
 }
-
 .shopping-container {
 	height: 800px;
 	display: flex;
@@ -22,7 +21,14 @@
 	margin: 50px 0;
 	align-items: center;
 }
-
+.null-container {
+	height: 800px;
+	display: flex;
+	flex-direction: column; 
+	align-items : center;
+	margin: 50px 0;
+	align-items: center;
+}
 .shopping-title {
 	display: flex;
 	flex-direction: column;
@@ -60,19 +66,23 @@ ul li {
 		<h2>Shopping Bag</h2>
 		<span>주문내역확인</span>
 	</div>
+	<form action="/project/orderTest" method="post">
 	<div class="shopping-container">
+	<label>주문자 이름을 입력하세요!</label><input type="text" name="name" required="required">
 		<c:set var = "total" value = "0" />
 		<c:forEach var="order" items="${list}">
 			<ul class="menu-li">
 				<li><c:out value="${order.menu}" /></li>
 				<li><c:out value="${order.price}" /></li>
-				<li><input type="number" min="1" value="1"></li>
+				<li><input type="number" name="count" min="1" value="1"></li>
 			</ul>
 			<c:set var = "total" value = "${total + order.price}"/>
+			<input type="hidden" name="order" value="${order.menu}">
 		</c:forEach>	
 			<label>총<c:out value="${total}"/>원</label>  
-			<input class="button" type="submit" value="변경하기">
-			<input class="button" type="submit" value="주문하기">
+			<input class="button" name="action" type="submit" value="변경하기">
+			<input class="button" name="action" type="submit" value="주문하기">
 	</div>
+	</form>
 </body>
 <jsp:include page="/layout/footer.jsp"></jsp:include>
