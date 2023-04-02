@@ -12,28 +12,21 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	background-color: beige;
 }
 .shopping-container {
 	height: 800px;
 	display: flex;
 	flex-direction: column; 
 	align-items : center;
-	margin: 50px 0;
-	align-items: center;
-}
-.null-container {
-	height: 800px;
-	display: flex;
-	flex-direction: column; 
-	align-items : center;
-	margin: 50px 0;
-	align-items: center;
+	margin: 100px 0;
 }
 .shopping-title {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	margin-top: 20px;
 }
 .ul-container {
 	display: flex;
@@ -59,6 +52,18 @@ ul li {
 	align-items: center;
 	margin-top: 20px;
 }
+input[type=text] {
+	width : 300px;
+	height: 50px;
+	background-color: #E7E7E7;
+	border: 0;
+	border-radius: 20px;
+	font-size: 40px;
+	text-align: center;
+}
+input[type=button] {
+	flex-direction: row;
+}
 </style>
 </head>
 <body>
@@ -74,14 +79,15 @@ ul li {
 			<ul class="menu-li">
 				<li><c:out value="${order.menu}" /></li>
 				<li><c:out value="${order.price}" /></li>
-				<li><input type="number" name="count" min="1" value="1"></li>
+				<li><input type="text" name="count" value="1"
+				oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></li>
 			</ul>
-			<c:set var = "total" value = "${total + order.price}"/>
+			<c:set var = "total" value = "${total + order.price * count}"/>
 			<input type="hidden" name="order" value="${order.menu}">
 		</c:forEach>	
 			<label>총<c:out value="${total}"/>원</label>  
-			<input class="button" name="action" type="submit" value="변경하기">
-			<input class="button" name="action" type="submit" value="주문하기">
+			<button type="button" onClick="location.href='shoppingBag.jsp'">수량 변경</button>
+			<input class="button" name="주문하기" type="submit" value="주문하기">
 	</div>
 	</form>
 </body>

@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%
-	
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,9 +16,8 @@
 }
 .order-container {
 	display: flex;
-	flex-direction: column;
+	justify-content: center;
 	align-items: center;
-	height: 800px;
 }
 .order-table {
 	display: flex;
@@ -32,20 +28,21 @@
 h1 {
 	margin: 20px;
 }
-input {
-	margin: 20px;
+th, td {
+	text-align: center;
+	padding-right: 30px;
 }
-
 </style>
 </head>
 <body>
-	<form action="/project/afterOrderTest" method="get">
 	<div class="order-container">
-	<h1>주문 내역 확인</h1> 
-	<p> 내가 주문한 내역 확인해보기 </p>
-	<p> 이름을 입력하세요 </p> 
-	<input type="text" name="name" required="required"> 
-	<input type="submit" value="확인">
+	<h1>관리자 전용 페이지</h1> 
+	</div>
+	<div class="order-table">
+	<form action="/project/adminTest" method="post">
+	<label>menu</label><input type="text" name="menu" required="required">
+	<label>price</label><input type="text" name="price">
+	<input type="submit" value="메뉴 추가" name="add">
 	</div>
 	</form>
 </body>

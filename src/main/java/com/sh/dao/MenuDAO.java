@@ -11,7 +11,7 @@ import com.sh.dto.OrderDTO;
 import com.sh.repository.IMenuDAO;
 import com.sh.utils.DBHelper;
 
-public class MenuDAO implements IMenuDAO{
+public class MenuDAO implements IMenuDAO {
 	private DBHelper dbHelper;
 	private Connection conn;
 
@@ -47,13 +47,13 @@ public class MenuDAO implements IMenuDAO{
 		return list;
 	}
 
-	public int delete(int id) {
+	public int delete(String menu) {
 		int resultCount = 0;
-		String queryStr = " DELETE FROM coffeeOrder " + " WHERE id = ? ";
+		String queryStr = " DELETE FROM menu " + " WHERE menu = ? ";
 		PreparedStatement pStmt = null;
 		try {
 			pStmt = conn.prepareStatement(queryStr);
-			pStmt.setInt(1, id);
+			pStmt.setString(1, menu);
 			pStmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -67,4 +67,39 @@ public class MenuDAO implements IMenuDAO{
 		return resultCount;
 	}
 
+	public int update(int price, String menu) {
+		int resultCount = 0;
+		String quertyStr = " UPDATE menu " + "SET price = ? " + "WHERE menu = ? ";
+		PreparedStatement pStmt = null;
+		try {
+			pStmt = conn.prepareStatement(quertyStr);
+			pStmt.setInt(1, price);
+			pStmt.setString(2, menu);
+			pStmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return resultCount;
+	}
+
+	public int save(String menu, int price) {
+		int resultCount = 0;
+		String quertyStr = " INSERT INTO menu(menu, price) " + "VALUES (?, ?) ";
+		PreparedStatement pStmt = null;
+		try {
+			pStmt = conn.prepareStatement(quertyStr);
+			pStmt.setString(1, menu);
+			pStmt.setInt(2, price);
+			resultCount = pStmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pStmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return resultCount;
+	}
 }

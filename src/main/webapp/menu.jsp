@@ -32,10 +32,11 @@ table tr, td{
 	padding: 10px;
 	margin-right: 5px;
 }
-input {
+input[type=submit] {
 	border: none;
 	cursor: pointer;
 	background-color: white;
+	align-items: center;
 }
 </style>
 </head>

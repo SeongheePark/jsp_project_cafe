@@ -68,5 +68,9 @@ a :hover{
 				<span><a href="/project/orderSelectCheck.jsp">ORDER</a></span>
 			</div>
 		</div>
+			<div class="header-icon">
+				<span class="material-symbols-outlined">local_cafe</span>
+				<span><a href="/project/admin.jsp">관리자페이지</a></span>
+			</div>
 	</div>
 </body>

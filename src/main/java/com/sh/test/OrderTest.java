@@ -52,11 +52,16 @@ public class OrderTest extends HttpServlet {
 		String name = request.getParameter("name");
 		int count = Integer.parseInt(request.getParameter("count"));
 		OrderDAO orderDAO = new OrderDAO();
-		String[] orderMenu = request.getParameterValues("order");
-		for (int i = 0; i < orderMenu.length; i++) {
-			orderDAO.save(name, orderMenu[i], count);
+		if("변경하기".equals(name)) {
+			
+		} else if("주문하기".equals(name)) {
+			String[] orderMenu = request.getParameterValues("order");
+			for (int i = 0; i < orderMenu.length; i++) {
+				orderDAO.save(name, orderMenu[i], count);
+			}
+			response.sendRedirect("mainPage.jsp");	
 		}
-		response.sendRedirect("mainPage.jsp");
+		
 	}
 
 }

@@ -100,7 +100,7 @@ public class OrderDAO {
 
 	public int save(String name, String menu, int count) {
 		int resultCount = 0;
-		String quertyStr = " INSERT INTO coffeeOrder(name, menu, count) " + "VALUES (?, ?, ?); ";
+		String quertyStr = " INSERT INTO coffeeOrder(name, menu, count) " + "VALUES (?, ?, ?) ";
 		PreparedStatement pStmt = null;
 		try {
 			pStmt = conn.prepareStatement(quertyStr);
