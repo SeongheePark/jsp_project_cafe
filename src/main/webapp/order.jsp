@@ -37,7 +37,7 @@ th, td {
 <body>
 	<div class="order-container">
 	<h1>주문 내역 확인</h1> 
-	<button type="button" onClick="location.href='orderTest?action=edit'">편집</button>
+	<button type="button" onClick="location.href='orderTest?action=edit&name=${orderList.name}'">편집</button>
 	</div>
 	<div class="order-table">
 	<table>

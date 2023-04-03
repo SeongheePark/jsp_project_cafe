@@ -44,15 +44,19 @@ public class MenuTest extends HttpServlet {
 		MenuDAO menuDAO = new MenuDAO();
 		ArrayList<MenuDTO> orderListType = menuDAO.selectMenu();
 		ArrayList<MenuDTO> getMenu = new ArrayList<MenuDTO>();
+		String[] count = request.getParameterValues("count");
 
 		for (int i = 0; i < orderListType.size(); i++) {
 			String tempOn = request.getParameter(orderListType.get(i).getMenu());
 			if (tempOn != null) {
-				MenuDTO dto = new MenuDTO(orderListType.get(i).getMenu(), orderListType.get(i).getPrice());
+				int intCount = Integer.parseInt(count[i]);
+				MenuDTO dto = new MenuDTO(orderListType.get(i).getMenu(), orderListType.get(i).getPrice(), intCount);
 				getMenu.add(dto);
 			}
 		}
+		// list -> ArrayList -> 0: MenuDTO , 1 : MenuDTO ->  MenuDTO.name, id, count
 		request.setAttribute("list", getMenu);
+		request.setAttribute("count", count);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("shoppingBag.jsp");
 		dispatcher.forward(request, response);
 	}

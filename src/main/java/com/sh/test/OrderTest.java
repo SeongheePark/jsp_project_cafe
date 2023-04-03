@@ -34,7 +34,7 @@ public class OrderTest extends HttpServlet {
 		String action = request.getParameter("action");
 		String name = request.getParameter("name");
 		if ("edit".equals(action)) {
-			orderList = orderDAO.selectOrder();
+			orderList = orderDAO.selectOrderByName(name);
 		} else if ("delete".equals(action)) {
 			String id = request.getParameter("id");
 			orderDAO.delete(Integer.parseInt(id));
@@ -48,20 +48,19 @@ public class OrderTest extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		String action = request.getParameter("action");
-		String name = request.getParameter("name");
-		int count = Integer.parseInt(request.getParameter("count"));
+		response.setContentType("text/html; charset=UTF-8");
 		OrderDAO orderDAO = new OrderDAO();
-		if("변경하기".equals(name)) {
-			
-		} else if("주문하기".equals(name)) {
-			String[] orderMenu = request.getParameterValues("order");
-			for (int i = 0; i < orderMenu.length; i++) {
-				orderDAO.save(name, orderMenu[i], count);
-			}
-			response.sendRedirect("mainPage.jsp");	
+		MenuDAO menuDAO = new MenuDAO();
+		String name = request.getParameter("name");
+		String[] menu = request.getParameterValues("menu");
+		String[] count = request.getParameterValues("count");
+		ArrayList<MenuDTO> menuList = menuDAO.selectMenu();
+		for (int i = 0; i < menu.length; i++) {
+			orderDAO.save(name, menu[i], Integer.parseInt(count[i])); 
 		}
-		
+		PrintWriter out = response.getWriter();
+		out.print("<script>alert('주문 성공!'); location.href='/project/orderSelectCheck.jsp'</script>");
+		out.flush();
 	}
 
 }

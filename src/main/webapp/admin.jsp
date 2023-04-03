@@ -40,11 +40,14 @@ th, td {
 	</div>
 	<div class="order-table">
 	<form action="/project/adminTest" method="post">
+	<label>관리자 비밀번호 입력</label><input type="password" name="password" required="required">
 	<label>menu</label><input type="text" name="menu" required="required">
-	<label>price</label><input type="text" name="price">
-	<input type="submit" value="메뉴 추가" name="add">
-	</div>
+	<label>price</label><input type="text" name="price" required="required">
+	<input type="submit" value="메뉴추가" name="changeMenu">
+	<input type="submit" value="메뉴수정" name="changeMenu">
+	<input type="submit" value="메뉴삭제" name="changeMenu">
 	</form>
+	</div>
 </body>
 </html>
 <jsp:include page="/layout/footer.jsp"></jsp:include>

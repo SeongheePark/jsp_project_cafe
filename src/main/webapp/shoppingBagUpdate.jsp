@@ -73,21 +73,25 @@ input[type=button] {
 	</div>
 	<form action="/project/orderTest" method="post">
 	<div class="shopping-container">
-	<label>주문자 이름을 입력하세요!</label><input type="text" name="name" required="required">
-	    <c:set var="total" value = "0"/>
-	    <c:set var="count" value="0"/>
+	<% 
+		String name = request.getParameter("name");
+	%>
+	<label><%=name %>님 주문 변경 내역</label>
+		<c:set var="total" value="0" />
 		<c:forEach var="order" items="${list}">
 			<ul class="menu-li">
-				<li>${order.menu}</li>
-				<li>${order.price}</li>
-				<li>${order.count}</li>
-				<li><input type="hidden" name="menu" value="${order.menu}"></li>
-				<li><input type="hidden" name="count" value="${order.count}"></li>
+				<li><c:out value="${order.menu}" /></li>
+				<li><c:out value="${order.price}" /></li>
+				<li><input type="text" name="count" value="1"
+				oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></li>
 			</ul>
-			<c:set var="total" value = "${total + order.price * order.count}"/>
-			</c:forEach>
+			<c:set var="total" value = "${total + order.price}"/>
+			<input type="hidden" name="order" value="${order.menu}">
+			<input type="hidden" name="total" value="${total + order.price}">
+		</c:forEach>	
 			<label>총<c:out value="${total}"/>원</label>  
-			<input class="button" name="button" type="submit" value="주문하기">
+			<input class="button" name="변경하기" type="submit" value="변경하기">
+			<input class="button" name="주문하기" type="submit" value="주문하기">
 	</div>
 	</form>
 </body>

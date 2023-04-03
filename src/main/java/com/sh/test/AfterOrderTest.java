@@ -26,23 +26,23 @@ public class AfterOrderTest extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		OrderDAO orderDAO = new OrderDAO();
-		ArrayList<OrderDTO> orderListSelect = null;
-		ArrayList<OrderDTO> orderList = orderDAO.selectOrder();
 		String name = request.getParameter("name");
+		System.out.println(name);
 		String action = request.getParameter("action");
+		ArrayList<OrderDTO> orderListSelect = orderDAO.selectOrderByName(name);
+		ArrayList<OrderDTO> orderList = orderDAO.selectOrder();
 		response.setContentType("text/html; charset=UTF-8");
-		
-
 		if ("관리자".equals(name)) {
 			request.setAttribute("list", orderList);
 		} else {
 			orderListSelect = orderDAO.selectOrderByName(name);
 			request.setAttribute("list", orderListSelect);
-			if(orderListSelect == null) {
+			if (orderListSelect.size() == 0) {
 				PrintWriter out = response.getWriter();
-				out.print("<script>alert('주문 내역이 없어요!'); location.href='/project/mainPage.jsp'</script>");
+				out.print("<script>alert('주문 내역이 없어요!'); location.href='/project/orderSelectCheck.jsp'</script>");
 				out.flush();
 			}
+
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher("order.jsp");
 		dispatcher.forward(request, response);

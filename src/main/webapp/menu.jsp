@@ -45,10 +45,12 @@ input[type=submit] {
 	<h1> MENU</h1>
 	<form action="/project/menuTest" method="post">
 	<table>
+		<c:set var="count" value="0" />
 		<c:forEach var="menuList" items="${list}">
 		<tr>
 			<td>${menuList.menu}</td>
 			<td>${menuList.price}</td>
+			<td><input type="number" name="count" min="1"></td>
 			<td><input type="checkbox" name="${menuList.menu}"></td>
 		</tr>
 		</c:forEach>

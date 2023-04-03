@@ -13,9 +13,15 @@ public class OrderDTO {
 	public OrderDTO(String name) {
 		this.name = name;
 	}
+	
+
+	public OrderDTO(String name, String menu, int count) {
+		this.name = name;
+		this.menu = menu;
+		this.count = count;
+	}
 
 	public OrderDTO(int id, String name, String menu, int count, String date) {
-		super();
 		this.id = id;
 		this.name = name;
 		this.menu = menu;
