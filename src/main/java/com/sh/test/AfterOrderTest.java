@@ -42,7 +42,6 @@ public class AfterOrderTest extends HttpServlet {
 				out.print("<script>alert('주문 내역이 없어요!'); location.href='/project/orderSelectCheck.jsp'</script>");
 				out.flush();
 			}
-
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher("order.jsp");
 		dispatcher.forward(request, response);

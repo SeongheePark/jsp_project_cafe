@@ -33,6 +33,7 @@ public class OrderTest extends HttpServlet {
 		ArrayList<OrderDTO> orderList = null;
 		String action = request.getParameter("action");
 		String name = request.getParameter("name");
+		System.out.println(name);
 		if ("edit".equals(action)) {
 			orderList = orderDAO.selectOrderByName(name);
 		} else if ("delete".equals(action)) {
