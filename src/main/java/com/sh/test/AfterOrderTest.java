@@ -27,15 +27,14 @@ public class AfterOrderTest extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		OrderDAO orderDAO = new OrderDAO();
 		String name = request.getParameter("name");
-		System.out.println(name);
 		String action = request.getParameter("action");
 		ArrayList<OrderDTO> orderListSelect = orderDAO.selectOrderByName(name);
 		ArrayList<OrderDTO> orderList = orderDAO.selectOrder();
 		response.setContentType("text/html; charset=UTF-8");
 		if ("관리자".equals(name)) {
 			request.setAttribute("list", orderList);
+			request.setAttribute("관리자", name);
 		} else {
-			orderListSelect = orderDAO.selectOrderByName(name);
 			request.setAttribute("list", orderListSelect);
 			if (orderListSelect.size() == 0) {
 				PrintWriter out = response.getWriter();

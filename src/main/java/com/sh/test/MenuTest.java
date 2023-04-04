@@ -45,7 +45,6 @@ public class MenuTest extends HttpServlet {
 		ArrayList<MenuDTO> orderListType = menuDAO.selectMenu();
 		ArrayList<MenuDTO> getMenu = new ArrayList<MenuDTO>();
 		String[] count = request.getParameterValues("count");
-
 		for (int i = 0; i < orderListType.size(); i++) {
 			String tempOn = request.getParameter(orderListType.get(i).getMenu());
 			if (tempOn != null) {

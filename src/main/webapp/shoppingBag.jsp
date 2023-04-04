@@ -8,18 +8,21 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="/layout/header.jsp"></jsp:include>
 <style type="text/css">
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	background-color: beige;
+	font-family: 'Gowun Dodum', sans-serif;
 }
 .shopping-container {
+	height: 800px;
+	min-height: 100%;
+	padding-bottom: 400px;
 	height: 800px;
 	display: flex;
 	flex-direction: column; 
 	align-items : center;
-	margin: 100px 0;
 }
 .shopping-title {
 	display: flex;
@@ -27,20 +30,21 @@
 	justify-content: center;
 	align-items: center;
 	margin-top: 20px;
+	margin-bottom: 100px;
 }
 .ul-container {
 	display: flex;
 	flex-direction: column;
 }
-.menu-li {
+ul.menu-li {
 	display: flex;
-}
-ul li {
 	list-style: none;
-	margin-right: 20px;
-	margin-bottom: 10px;
+	margin-left: 90px;
 }
-
+li {
+	margin: 10px 20px;
+	font-size: 20px;
+}
 .number {
 	width: 30px;
 	height: 30px;
@@ -53,16 +57,24 @@ ul li {
 	margin-top: 20px;
 }
 input[type=text] {
-	width : 300px;
-	height: 50px;
+	width : 200px;
+	height: 40px;
 	background-color: #E7E7E7;
 	border: 0;
 	border-radius: 20px;
-	font-size: 40px;
+	font-size: 20px;
 	text-align: center;
+	margin-bottom: 30px;
 }
-input[type=button] {
-	flex-direction: row;
+.total {
+	margin-top: 20px;
+}
+input[type=submit] {
+	border: none;
+	cursor: pointer;
+	font-size: 20px;
+	background-color: white;
+	align-items: center;
 }
 </style>
 </head>
@@ -73,7 +85,8 @@ input[type=button] {
 	</div>
 	<form action="/project/orderTest" method="post">
 	<div class="shopping-container">
-	<label>주문자 이름을 입력하세요!</label><input type="text" name="name" required="required">
+	<label>주문자 이름을 입력하세요!</label>
+	<input type="text" name="name" required="required">
 	    <c:set var="total" value = "0"/>
 	    <c:set var="count" value="0"/>
 		<c:forEach var="order" items="${list}">
@@ -86,7 +99,9 @@ input[type=button] {
 			</ul>
 			<c:set var="total" value = "${total + order.price * order.count}"/>
 			</c:forEach>
-			<label>총<c:out value="${total}"/>원</label>  
+			<div class="total">
+			<label>총 <c:out value="${total}"/>원</label>
+			</div>
 			<input class="button" name="button" type="submit" value="주문하기">
 	</div>
 	</form>

@@ -7,9 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.sh.dto.OrderDTO;
+import com.sh.repository.IOrderDAO;
 import com.sh.utils.DBHelper;
 
-public class OrderDAO {
+public class OrderDAO implements IOrderDAO{
 	private DBHelper dbHelper;
 	private Connection conn;
 

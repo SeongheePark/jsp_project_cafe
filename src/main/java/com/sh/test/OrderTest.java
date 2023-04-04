@@ -29,21 +29,28 @@ public class OrderTest extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
 		OrderDAO orderDAO = new OrderDAO();
 		ArrayList<OrderDTO> orderList = null;
 		String action = request.getParameter("action");
 		String name = request.getParameter("name");
-		System.out.println(name);
+		String getName = request.getParameter("getName");
+		PrintWriter out = response.getWriter();
 		if ("edit".equals(action)) {
-			orderList = orderDAO.selectOrderByName(name);
+			if ("관리자".equals(name)) {
+				orderList = orderDAO.selectOrder();
+			} else {
+				orderList = orderDAO.selectOrderByName(getName);
+			}
+			request.setAttribute("list", orderList);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("order_delete.jsp");
+			dispatcher.forward(request, response);
 		} else if ("delete".equals(action)) {
 			String id = request.getParameter("id");
 			orderDAO.delete(Integer.parseInt(id));
-			orderList = orderDAO.selectOrder();
+			out.print("<script>alert('삭제 성공!'); location.href='/project/orderSelectCheck.jsp'</script>");
+			out.flush();
 		}
-		request.setAttribute("list", orderList);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("order_delete.jsp");
-		dispatcher.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -56,12 +63,17 @@ public class OrderTest extends HttpServlet {
 		String[] menu = request.getParameterValues("menu");
 		String[] count = request.getParameterValues("count");
 		ArrayList<MenuDTO> menuList = menuDAO.selectMenu();
-		for (int i = 0; i < menu.length; i++) {
-			orderDAO.save(name, menu[i], Integer.parseInt(count[i])); 
-		}
 		PrintWriter out = response.getWriter();
-		out.print("<script>alert('주문 성공!'); location.href='/project/orderSelectCheck.jsp'</script>");
-		out.flush();
+		if(menu == null) {
+			out.print("<script>alert('메뉴를 담아주세요!'); location.href='/project/menuTest'</script>");
+			out.flush();				
+		} else {
+			for (int i = 0; i < menu.length; i++) {
+				orderDAO.save(name, menu[i], Integer.parseInt(count[i]));				
+				out.print("<script>alert('주문 성공!'); location.href='/project/orderSelectCheck.jsp'</script>");
+				out.flush();
+			}			
+		}
 	}
 
 }

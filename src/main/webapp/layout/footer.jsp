@@ -17,7 +17,6 @@ footer {
 }
 .footer {
 	display: flex;
-	flex: 0 0 1;
 	flex-direction: column;
 	align-items: center;
 	margin: 10px;

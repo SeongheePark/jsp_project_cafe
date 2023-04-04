@@ -8,11 +8,12 @@
 <title>Insert title here</title>
 <jsp:include page="/layout/header.jsp"></jsp:include>
 <style type="text/css">
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
 *{
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	font-family: 'Gowun Dodum', sans-serif;
 }
 .order-container {
 	display: flex;
@@ -32,12 +33,19 @@ th, td {
 	text-align: center;
 	padding-right: 30px;
 }
+a {
+	text-decoration: none;
+	color: red;
+	font-weight: lighter;
+}
+button {
+	border: none;
+}
 </style>
 </head>
 <body>
 	<div class="order-container">
 	<h1>주문 내역 확인</h1> 
-	<input type="button" value="편집">
 	</div>
 	<div class="order-table">
 	<table>
